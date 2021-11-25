@@ -41,8 +41,12 @@ public class CallDetectionManagerModule
     @ReactMethod
     public void startListener() {
         if (activity == null) {
-            activity = getCurrentActivity();
-            activity.getApplication().registerActivityLifecycleCallbacks(this);
+           try {
+               activity = getCurrentActivity();
+               activity.getApplication().registerActivityLifecycleCallbacks(this);
+           } catch (Exception e) {
+               // TODO: handle exception
+           }
         }
 
         telephonyManager = (TelephonyManager) this.reactContext.getSystemService(
